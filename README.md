@@ -1,29 +1,3 @@
-## Running the app
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
 # Тестовое задание codemark
 
 Необходимо разработать backend для Restful веб-приложения. Основная задача бекенда - управление пользователями и их ролями. Описание модели данных:  
@@ -59,3 +33,29 @@ $ npm run test:cov
 - Соответствие общепринятым best practices
 - Отсутствие ошибок - в программе не должно быть ошибок, она должна работать
 - Полнота реализации и соответствие требованиям – ждем полностью выполненное задание. Что-то может быть реализовано не до конца, но в этом случае при отправке решения напишите что именно не реализовано и почему
+
+## Running the app
+
+```bash
+# development
+$ npm run start
+
+# watch mode
+$ npm run start:dev
+
+# production mode
+$ npm run start:prod
+```
+
+## Test
+
+```bash
+# unit tests
+$ npm run test
+
+# e2e tests
+$ npm run test:e2e
+
+# test coverage
+$ npm run test:cov
+```
