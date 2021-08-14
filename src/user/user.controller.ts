@@ -6,9 +6,9 @@ import { UpdateUserDto } from './dto/update-user.dto';
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
-
+// ???? ASYNC ????
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
+  async create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
   }
 
@@ -17,18 +17,19 @@ export class UserController {
     return this.userService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
+  @Get(':login')
+  findOne(@Param('login') login: string) {
+    console.log(login);
+    return this.userService.findOne(login);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(+id, updateUserDto);
+  @Patch(':login')
+  async update(@Param('login') login: string, @Body() updateUserDto: UpdateUserDto) {
+    return this.userService.update(login, updateUserDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
+  @Delete(':login')
+  async remove(@Param('login') login: string) {
+    return this.userService.remove(login);
   }
 }
