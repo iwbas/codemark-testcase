@@ -10,10 +10,14 @@ export class UserService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
   ) {}
-  private users: Array<User> = [];
 
   async create(createUserDto: CreateUserDto) {
-    return await this.userRepository.save(createUserDto);
+    return await this.userRepository
+      .findOne(createUserDto.login)
+      .then(async (user) => {
+        if (user) throw { error: 'User already exists' };
+        return await this.userRepository.save(createUserDto);
+      });
   }
 
   async findAll() {
@@ -21,11 +25,7 @@ export class UserService {
   }
 
   async findOne(login: string) {
-    return await this.userRepository.find({
-      where: {
-        login: login,
-      },
-    });
+    return await this.userRepository.findOne(login);
   }
 
   async update(login: string, updateUserDto: UpdateUserDto) {
