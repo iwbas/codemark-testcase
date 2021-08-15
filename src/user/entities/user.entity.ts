@@ -12,7 +12,7 @@ export class User {
   @Column()
   name: string;
 
-  @ManyToMany(type => Role, role => role.users)
+  @ManyToMany(type => Role, role => role.users, {cascade: true})
   @JoinTable()
   roles: Role[];
 }

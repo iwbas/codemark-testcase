@@ -24,7 +24,7 @@ export class UserController {
     return this.userService
       .create(createUserDto)
       .then((result) => ({ success: true }))
-      .catch((err) => ({success: false, errors: err}));
+      .catch((err) => ({ success: false, errors: err }));
   }
 
   @Get()
@@ -42,11 +42,17 @@ export class UserController {
     @Param('login') login: string,
     @Body() updateUserDto: UpdateUserDto,
   ) {
-    return this.userService.update(login, updateUserDto);
+    return this.userService
+      .update(login, updateUserDto)
+      .then((result) => ({ success: true }))
+      .catch((err) => ({ success: false, errors: err }));
   }
 
   @Delete(':login')
   async remove(@Param('login') login: string) {
-    return this.userService.remove(login);
+    return this.userService
+      .remove(login)
+      .then((result) => ({ success: true }))
+      .catch((err) => ({ success: false, errors: err }));
   }
 }
