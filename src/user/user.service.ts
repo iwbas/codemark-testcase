@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Role } from 'src/role/entities/role.entity';
+import { Role } from '../role/entities/role.entity';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -14,14 +14,15 @@ export class UserService {
   ) {}
 
   async create(createUserDto: CreateUserDto) {
-    // Переписать на promise -> await ???
-    return await this.userRepository.findOne(createUserDto.login).then(async user => {
-      if (user) throw {error: "User already exists"};
-      return this.roleRepository.findByIds(createUserDto.roles)      
-    }).then(roles => {
-      createUserDto.roles = roles ? roles : null;
-      return this.userRepository.save(createUserDto);
-    })
+    var user = await this.userRepository.findOne(createUserDto.login);
+
+    if (user) throw {error: "User already exists"};
+
+    if (createUserDto.roles) {
+      createUserDto.roles = await this.roleRepository.findByIds(createUserDto.roles);
+    }
+
+    return this.userRepository.save(createUserDto);
   }
 
   async findAll() {
