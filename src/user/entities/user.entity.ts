@@ -15,4 +15,11 @@ export class User {
   @ManyToMany(type => Role, role => role.users, {cascade: true})
   @JoinTable()
   roles: Role[];
+
+  constructor(login: string, password: string, name: string, roles: Role[]) {
+    this.login = login;
+    this.password = password;
+    this.name = name;
+    this.roles = roles;
+  }
 }
